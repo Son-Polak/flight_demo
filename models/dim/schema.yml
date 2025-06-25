@@ -1,0 +1,12 @@
+version: 2
+
+models:
+    -   name: Dim_airport
+        description: 
+        columns: 
+            -   name: airport_code
+                description: "primary key"
+                data_tests:
+                    - unique
+                    - not_null
+
