@@ -22,13 +22,13 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+on-run-start: 
+  - CREATE SCHEMA IF NOT EXISTS logs;
+  - CREATE TABLE if not exists logs.log_table (id varchar(50), start_at timestamp, end_at timestamp, model_name text, run_duration float);
+  - " {{ run_log('insert',general) }} "
+on-run-end: 
+  - " {{ run_log('update',general) }} "
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
 models:
   flight_demo_dbt:
     # Config indicated by + and applies to all files under models/example/
@@ -38,6 +38,10 @@ models:
     dim:
       +materialized: incremental
       +schema: dim
+      +pre-hook: "{{ run_log('insert', this.name) }}"
+      +post-hook: "{{ run_log('update', this.name) }}"
     fact:
       +materialized: incremental
       +schema: fact
+      +pre-hook: "{{ run_log('insert', this.name) }}"
+      +post-hook: "{{ run_log('update', this.name) }}"
