@@ -9,15 +9,3 @@ models:
                 data_tests:
                     - unique
                     - not_null
-
-
-
-
-    {# -   name:  #}
-        {# description:  #}
-        {# columns:  #}
-            {# -   name:  #}
-                {# description: "primary key" #}
-                {# data_tests: #}
-                    {# - unique #}
-                    {# - not_null #}
