@@ -34,3 +34,10 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+      +enable: False
+    dim:
+      +materialized: incremental
+      +schema: dim
+    fact:
+      +materialized: incremental
+      +schema: fact
