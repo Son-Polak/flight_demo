@@ -18,4 +18,9 @@ select
     , '{{ run_started_at }}' :: timestamp as etl_time
 from {{ source('stg', 'tickets') }} as t 
 left join {{ source('stg', 'bookings') }} as b  on t.book_ref =b.book_ref 
-
+{% if is_incremental() %}
+where last_update > coalesce(
+							(select max(last_update) from {{ this }}),
+							'1900-01-01'
+)
+{% endif %}

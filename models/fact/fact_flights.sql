@@ -17,3 +17,9 @@ from (
 		, round(extract(epoch from (scheduled_arrival - scheduled_departure))/60/60,2) as flight_duration_expected
 	from {{ source('stg', 'flights') }} as f
 )
+{% if is_incremental() %}
+where last_update > coalesce(
+							(select max(last_update) from {{ this }}),
+							'1900-01-01'
+)
+{% endif %}

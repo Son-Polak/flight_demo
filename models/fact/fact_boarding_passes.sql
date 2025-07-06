@@ -16,3 +16,9 @@ select
 from {{ source('stg', 'ticket_flights') }} as tf 
 left join {{ source('stg', 'boarding_passes') }} as bp on
 	tf.ticket_no = bp.ticket_no AND tf.flight_id = bp.flight_id
+{% if is_incremental() %}
+where tf.last_update > coalesce(
+                                (select max(last_update) from {{ this }}),
+                                '1900-01-01'
+)
+{% endif %}
