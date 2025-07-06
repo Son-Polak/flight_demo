@@ -25,9 +25,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 on-run-start: 
   - CREATE SCHEMA IF NOT EXISTS logs;
   - CREATE TABLE if not exists logs.log_table (id varchar(50), start_at timestamp, end_at timestamp, model_name text, run_duration float);
-  - " {{ run_log('insert',general) }} "
+  - " {{ run_log('insert','general') }} "
 on-run-end: 
-  - " {{ run_log('update',general) }} "
+  - " {{ run_log('update','general') }} "
 
 models:
   flight_demo_dbt:

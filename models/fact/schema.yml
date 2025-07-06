@@ -1,22 +1,29 @@
 version: 2
 
-#    - name: 
-#      description: 
-#      columns: 
-#        - name: 
-#          description: "primary key"
-#          data_tests:
-#             - unique
-#             - not_null
+models:
+  - name: fact_flights.sql
+    description: "info from flight table"
+    columns: 
+      - name: flight_id
+        description: "primary key"
+        data_tests:
+          - unique
+          - not_null
 
+  - name: fact_boarding_passes
+    description: "data from ticket_flights and boarding_passes tables"
+    columns: 
+    - name: ticket_no
+      description: "primary key"
+      data_tests:
+        - unique
+        - not_null
 
-
-
-#    - name: 
-#      description: 
-#      columns: 
-#        - name: 
-#          description: "primary key"
-#          data_tests:
-#             - unique
-#             - not_null
+  - name: fact_tickets
+    description: "data from tickets and bookings tables"
+    columns: 
+      - name: book_ref
+        description: "primary key"
+        data_tests:
+          - unique
+          - not_null
