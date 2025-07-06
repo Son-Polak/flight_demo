@@ -1,12 +1,20 @@
 version: 2
 
 models:
-    -   name: Dim_airport
-        description: 
-        columns: 
-            -   name: airport_code
-                description: "primary key"
-                data_tests:
-                    - unique
-                    - not_null
+    - name: dim_airport
+      description: "airport_data table"
+      columns: 
+        - name: airport_code
+          description: "primary key"
+          data_tests:
+            - unique
+            - not_null
 
+    - name: dim_aircraft
+      description: "aircraft data + seats tables"
+      columns:
+        - name: aircraft_code
+          description : "primary key"
+          data_tests:
+            - unique
+            - not_null
