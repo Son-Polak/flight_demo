@@ -1,6 +1,6 @@
 {{
   config(
-    uniqe_key = '',
+    uniqe_key = 'ticket_no',
     )
 }}
 
